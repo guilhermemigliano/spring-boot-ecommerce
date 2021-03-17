@@ -26,13 +26,13 @@ create table pedido (
   foreign key cli_id_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade
 );
 
-/*
+
 -- Cria tabela Produto
 create table produto(
     prod_id bigint unsigned not null auto_increment,
     prod_nome varchar(20) not null,
     prod_preco float not null,
-    primary key (prod_id),
+    primary key (prod_id)
 );
 
 -- Cria tabela Carrinho
@@ -46,6 +46,7 @@ create table carrinho (
   foreign key ped_pedido_fk (ped_id) references pedido (ped_id) on delete restrict on update cascade
 );
 
+/*
 create table aut_autorizacao (
     aut_id bigint unsigned not null auto_increment,
     aut_nome varchar(20) not null,
