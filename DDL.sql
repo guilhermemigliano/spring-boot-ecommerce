@@ -17,7 +17,6 @@ unique key uni_cli_nome (cli_nome),
 unique key uni_cli_email (cli_email)
 );
 
-/*
 -- Cria tabela Pedido
 create table pedido (
   ped_id bigint unsigned not null auto_increment,
@@ -27,6 +26,7 @@ create table pedido (
   foreign key cli_id_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade
 );
 
+/*
 -- Cria tabela Produto
 create table produto(
     prod_id bigint unsigned not null auto_increment,
