@@ -20,11 +20,12 @@ cli_id bigint unsigned not null auto_increment,
 cli_nome varchar(20) not null,
 cli_email varchar(100) not null,
 cli_senha varchar(100) not null,
-primary key (usr_id),
+primary key (cli_id),
 unique key uni_cli_nome (cli_nome),
 unique key uni_cli_email (cli_email)
 );
 
+/*
 -- Cria tabela Pedido
 create table pedido (
   ped_id bigint unsigned not null auto_increment,
@@ -74,7 +75,7 @@ create table uau_usuario_autorizacao (
 
 
 
-/*
+
 create table usr_usuario (
 usr_id bigint unsigned not null auto_increment, usr_nome varchar(20) not null,
 usr_email varchar(100) not null,
