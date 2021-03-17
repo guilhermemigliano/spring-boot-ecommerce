@@ -6,14 +6,6 @@ create user 'user'@'localhost' identified by 'pass123';
 
 grant select, insert, delete, update on ecommerce.* to user@'localhost';
 
-create schema ecommerce;
-
-use ecommerce;
-
-create user 'user'@'localhost' identified by 'pass123';
-
-grant select, insert, delete, update on ecommerce.* to user@'localhost';
-
 -- Cria tabela cliente
 create table cliente (
 cli_id bigint unsigned not null auto_increment,
