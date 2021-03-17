@@ -59,7 +59,7 @@ create table aut_autorizacao (
 create table uau_usuario_autorizacao (
     cli_id bigint unsigned not null,
     aut_id bigint unsigned not null,
-    primary key (usr_id, aut_id),
+    primary key (cli_id, aut_id),
     foreign key uau_usr_fk (usr_id) references cliente (cli_id) on delete restrict on update cascade,
     foreign key uau_aut_fk (aut_id) references aut_autorizacao (aut_id) on delete restrict on update cascade
 );
