@@ -39,7 +39,7 @@ create table produto(
 
 create table carrinho (
   car_id bigint unsigned not null auto_increment,
-  prod_id bigint not null,
+  prod_id bigint unsigned not null,
   car_prod_qtd float not null,
   ped_id bigint unsigned not null,
   primary key (car_id, ped_id),
