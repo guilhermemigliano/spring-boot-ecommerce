@@ -43,7 +43,7 @@ create table carrinho (
   car_prod_qtd float not null,
   ped_id bigint unsigned not null,
   primary key (car_id, ped_id),
-  foreign key ped_pedido_fk (ped_id) references pedido (ped_id) on delete restrict on update cascade
+  foreign key ped_pedido_fk (ped_id) references pedido (ped_id) on delete restrict on update cascade,
   foreign key car_prodid_fk (prod_id) references produto (prod_id) on delete restrict on update cascade
 );
 
@@ -82,7 +82,7 @@ insert into produto (prod_nome, prod_preco) values ('Computador', 15);
 insert into produto (prod_nome, prod_preco) values ('Smartphone', 50);
 insert into produto (prod_nome, prod_preco) values ('Teclado', 25);
 
-
+-- Carrinho
 insert into carrinho (prod_id, car_prod_qtd, ped_id) values (1, 1, 1);
 insert into carrinho (prod_id, car_prod_qtd, ped_id) values (2, 1, 1);
 
