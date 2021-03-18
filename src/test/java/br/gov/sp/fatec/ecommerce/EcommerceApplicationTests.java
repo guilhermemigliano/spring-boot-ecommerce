@@ -2,6 +2,9 @@ package br.gov.sp.fatec.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -13,7 +16,7 @@ import br.gov.sp.fatec.ecommerce.repository.AutorizacaoRepository;
 import br.gov.sp.fatec.ecommerce.repository.ClienteRepository;
 
 @SpringBootTest
-@Transactional //cada metodo da classe abre uma transação nova
+@Transactional //cada metodo da classe abre uma transação nova e abre uma conexão
 @Rollback //terminou o metodo ele não da commit
 class EcommerceApplicationTests {
 
@@ -33,8 +36,13 @@ class EcommerceApplicationTests {
         cliente.setNome("Usuario");
         cliente.setEmail("usuario@fatec.com.br");
         cliente.setSenha("senha12345");
+        cliente.setAutorizacoes(new HashSet<Autorizacao>());
+        Autorizacao aut = new Autorizacao();        
+        aut.setNome("ROLE_USER1");
+        autRepo.save(aut);
+        cliente.getAutorizacoes().add(aut);
         clienteRepo.save(cliente);
-        assertNotNull(cliente.getId());
+        assertNotNull(cliente.getAutorizacoes().iterator().next().getId());
     }
 
     @Test
