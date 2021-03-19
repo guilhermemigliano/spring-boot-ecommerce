@@ -57,8 +57,7 @@ class EcommerceApplicationTests {
         aut.setNome("ROLE_USER2");
         aut.setClientes(new HashSet<Cliente>());
         aut.getClientes().add(cliente);
-        autRepo.save(aut);
-        cliente.getAutorizacoes().add(aut);        
+        autRepo.save(aut);      
         assertNotNull(aut.getClientes().iterator().next().getId());
     }
 
@@ -85,6 +84,12 @@ class EcommerceApplicationTests {
     @Test
     void testaBuscaClienteNome(){
         Cliente cliente = clienteRepo.findByNome("Guilherme");
+        assertNotNull(cliente);       
+    }
+
+    @Test
+    void testaBuscaClienteNomeSenha(){
+        Cliente cliente = clienteRepo.findByNomeAndSenha("Guilherme", "senha12345");
         assertNotNull(cliente);       
     }
 
