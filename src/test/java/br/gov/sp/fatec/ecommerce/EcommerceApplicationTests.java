@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,6 +47,22 @@ class EcommerceApplicationTests {
     }
 
     @Test
+    void testaInsercaoAutorizacao(){
+        Cliente cliente = new Cliente();
+        cliente.setNome("Usuario2");
+        cliente.setEmail("usuario2@fatec.com.br");
+        cliente.setSenha("senha12345");
+        clienteRepo.save(cliente);        
+        Autorizacao aut = new Autorizacao();        
+        aut.setNome("ROLE_USER2");
+        aut.setClientes(new HashSet<Cliente>());
+        aut.getClientes().add(cliente);
+        autRepo.save(aut);
+        cliente.getAutorizacoes().add(aut);        
+        assertNotNull(aut.getClientes().iterator().next().getId());
+    }
+
+    @Test
     void testaAutorizacao(){
         Cliente cliente = clienteRepo.findById(1L).get();
         assertEquals("ROLE_ADMIN", cliente.getAutorizacoes().iterator().next().getNome());
@@ -57,6 +74,24 @@ class EcommerceApplicationTests {
         Autorizacao aut = autRepo.findById(1L).get();
         assertEquals("Guilherme", aut.getClientes().iterator().next().getNome());
        
+    }
+
+    @Test
+    void testaBuscaClienteNomeContains(){
+        List<Cliente> clientes = clienteRepo.findByNomeContainsIgnoreCase("A");
+        assertFalse(clientes.isEmpty());       
+    }
+
+    @Test
+    void testaBuscaClienteNome(){
+        Cliente cliente = clienteRepo.findByNome("Guilherme");
+        assertNotNull(cliente);       
+    }
+
+    @Test
+    void testaBuscaClienteNomeAutorizacao(){
+        List<Cliente> clientes = clienteRepo.findByAutorizacoesNome("ROLE_ADMIN");
+        assertFalse(clientes.isEmpty());       
     }
 
 }
