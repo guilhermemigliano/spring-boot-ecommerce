@@ -32,7 +32,7 @@ create table pedido_cliente(
   primary key (cli_id, ped_id),
   foreign key pedcli_cli_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade,
   foreign key pedcli_ped_fk (ped_id) references pedido (ped_id) on delete restrict on update cascade
-)
+);
 
 
 -- Cria tabela Autorização
