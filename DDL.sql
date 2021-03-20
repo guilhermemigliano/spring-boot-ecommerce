@@ -65,10 +65,10 @@ insert into pedido (ped_nome, ped_valor) values ("Pedido-04", 299.99);
 
 -- Pedido_Cliente
 
-insert into pedido_cliente (2,1);
-insert into pedido_cliente (2,2);
-insert into pedido_cliente (3,3);
-insert into pedido_cliente (3,4);
+insert into pedido_cliente (cli_id, ped_id) values (2, 1);
+insert into pedido_cliente (cli_id, ped_id) values (2, 2);
+insert into pedido_cliente (cli_id, ped_id) values (3, 3);
+insert into pedido_cliente (cli_id, ped_id) values (3, 4);
 
 
 
