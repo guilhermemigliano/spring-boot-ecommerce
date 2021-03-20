@@ -20,32 +20,20 @@ unique key uni_cli_email (cli_email)
 -- Cria tabela Pedido
 create table pedido (
   ped_id bigint unsigned not null auto_increment,
-  ped_valor float not null,
+  ped_nome varchar(50) not null,
+  ped_valor float not null,  
+  primary key (ped_id),
+  unique key uni_ped_nome (ped_nome)  
+);
+
+create table pedido_cliente(
   cli_id bigint unsigned not null,
-  primary key (ped_id, cli_id),
-  foreign key cli_id_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade
-);
-
--- Cria tabela Produto
-create table produto(
-    prod_id bigint unsigned not null auto_increment,
-    prod_nome varchar(20) not null,
-    prod_preco float not null,
-    primary key (prod_id)
-);
-
-
--- Cria tabela Carrinho
-
-create table carrinho (
-  car_id bigint unsigned not null auto_increment,
-  prod_id bigint unsigned not null,
-  car_prod_qtd float not null,
   ped_id bigint unsigned not null,
-  primary key (car_id, ped_id),
-  foreign key ped_pedido_fk (ped_id) references pedido (ped_id) on delete restrict on update cascade,
-  foreign key car_prodid_fk (prod_id) references produto (prod_id) on delete restrict on update cascade
-);
+  primary key (cli_id, ped_id),
+  foreign key pedcli_cli_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade,
+  foreign key pedcli_ped_fk (ped_id) references pedido (ped_id) on delete restrict on update cascade
+)
+
 
 -- Cria tabela Autorização
 create table aut_autorizacao (
@@ -70,30 +58,18 @@ insert into cliente (cli_nome, cli_email, cli_senha) values ('Maria', 'maria@fat
 insert into cliente (cli_nome, cli_email, cli_senha) values ('Joana', 'joana@fatec.com.br', 'senha12345');
 
 -- Pedido
-insert into pedido (ped_valor, cli_id) values (40, 2);
-insert into pedido (ped_valor, cli_id) values (25, 2);
-insert into pedido (ped_valor, cli_id) values (100, 3);
-insert into pedido (ped_valor, cli_id) values (50, 3);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-01", 155,99);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-02", 160,10);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-03", 277,00);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-04", 299,99);
 
--- Produto
-insert into produto (prod_nome, prod_preco) values ('Relógio', 10);
-insert into produto (prod_nome, prod_preco) values ('Televisão', 30);
-insert into produto (prod_nome, prod_preco) values ('Computador', 15);
-insert into produto (prod_nome, prod_preco) values ('Smartphone', 50);
-insert into produto (prod_nome, prod_preco) values ('Teclado', 25);
+-- Pedido_Cliente
 
--- Carrinho
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (1, 1, 1);
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (2, 1, 1);
+inset into pedido_cliente (2,1);
+inset into pedido_cliente (2,2);
+inset into pedido_cliente (3,3);
+inset into pedido_cliente (3,4);
 
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (1, 1, 2);
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (3, 1, 2);
-
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (4, 2, 3);
-
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (1, 1, 4);
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (3, 1, 4);
-insert into carrinho (prod_id, car_prod_qtd, ped_id) values (5, 1, 4);
 
 
 -- Autorização
