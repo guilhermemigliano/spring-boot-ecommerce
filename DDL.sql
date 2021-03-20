@@ -58,10 +58,10 @@ insert into cliente (cli_nome, cli_email, cli_senha) values ('Maria', 'maria@fat
 insert into cliente (cli_nome, cli_email, cli_senha) values ('Joana', 'joana@fatec.com.br', 'senha12345');
 
 -- Pedido
-insert into pedido (ped_nome, ped_valor) values ("Pedido-01", 155,99);
-insert into pedido (ped_nome, ped_valor) values ("Pedido-02", 160,10);
-insert into pedido (ped_nome, ped_valor) values ("Pedido-03", 277,00);
-insert into pedido (ped_nome, ped_valor) values ("Pedido-04", 299,99);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-01", 155.99);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-02", 160.10);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-03", 277.00);
+insert into pedido (ped_nome, ped_valor) values ("Pedido-04", 299.99);
 
 -- Pedido_Cliente
 
