@@ -15,6 +15,7 @@ import br.gov.sp.fatec.ecommerce.entity.Autorizacao;
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
 import br.gov.sp.fatec.ecommerce.repository.AutorizacaoRepository;
 import br.gov.sp.fatec.ecommerce.repository.ClienteRepository;
+import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
 @SpringBootTest
 @Transactional //cada metodo da classe abre uma transação nova e abre uma conexão
@@ -26,6 +27,9 @@ class EcommerceApplicationTests {
 
     @Autowired //sprint identiciar que precisa encontrar algo do tipo ClienteRepository
     private AutorizacaoRepository autRepo;
+
+    @Autowired
+    private SegurancaService segService;
 
 	@Test
 	void contextLoads() {
@@ -97,6 +101,30 @@ class EcommerceApplicationTests {
     void testaBuscaClienteNomeAutorizacao(){
         List<Cliente> clientes = clienteRepo.findByAutorizacoesNome("ROLE_ADMIN");
         assertFalse(clientes.isEmpty());       
+    }
+
+    @Test
+    void testaBuscaClienteNomeQuery(){
+        Cliente cliente = clienteRepo.buscaClientePorNome("Guilherme");
+        assertNotNull(cliente);       
+    }
+
+    @Test
+    void testaBuscaClienteNomeSenhaQuery(){
+        Cliente cliente = clienteRepo.buscaUsuarioPorNomeESenha("Guilherme", "senha12345");
+        assertNotNull(cliente);       
+    }
+
+    @Test
+    void testaBuscaClienteNomeAutorizacaoQuery(){
+        List<Cliente> clientes = clienteRepo.buscaPorNomeAutorizacao("ROLE_ADMIN");
+        assertFalse(clientes.isEmpty());       
+    }
+
+    @Test
+    void testaServicoCriaUsuario(){
+        Cliente cliente = segService.criarCliente("Normal", "normal@normal.com.br", "senha12345", "ROLE_USER");
+        assertNotNull(cliente);
     }
 
 }
