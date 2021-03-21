@@ -28,5 +28,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     @Query("select c from Cliente c inner join c.autorizacoes a where a.nome = ?1")
     public List<Cliente> buscaPorNomeAutorizacao(String autorizacao);
+
+    @Query("select c from  Cliente c where c.email = ?1 ")
+    public Cliente buscarClientePorEmail (String email);
+
+    
+
+    
     
 }

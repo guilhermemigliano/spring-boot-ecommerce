@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.ecommerce.entity.Autorizacao;
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
+import br.gov.sp.fatec.ecommerce.entity.Pedido;
 import br.gov.sp.fatec.ecommerce.repository.AutorizacaoRepository;
 import br.gov.sp.fatec.ecommerce.repository.ClienteRepository;
+import br.gov.sp.fatec.ecommerce.repository.PedidoRepository;
 import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
 @SpringBootTest
@@ -22,11 +24,14 @@ import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 @Rollback //terminou o metodo ele não da commit
 class EcommerceApplicationTests {
 
-    @Autowired //sprint identiciar que precisa encontrar algo do tipo ClienteRepository
+    @Autowired //sprint identificar que precisa encontrar algo do tipo ClienteRepository
     private ClienteRepository clienteRepo;
 
-    @Autowired //sprint identiciar que precisa encontrar algo do tipo ClienteRepository
+    @Autowired //sprint identificar que precisa encontrar algo do tipo AutorizacaoRepository
     private AutorizacaoRepository autRepo;
+
+    @Autowired //sprint identificar que precisa encontrar algo do tipo PedidoRepository
+    private PedidoRepository pedRepo;
 
     @Autowired
     private SegurancaService segService;
@@ -125,6 +130,12 @@ class EcommerceApplicationTests {
     void testaServicoCriaUsuario(){
         Cliente cliente = segService.criarCliente("Normal", "normal@normal.com.br", "senha12345", "ROLE_USER");
         assertNotNull(cliente);
+    }
+
+    @Test
+    void testaServicoCriaPedido(){
+        Pedido pedido = segService.criarPedido("Pedido-05", 500.00, "guilherme@fatec.com.br");
+        assertNotNull(pedido);
     }
 
 }

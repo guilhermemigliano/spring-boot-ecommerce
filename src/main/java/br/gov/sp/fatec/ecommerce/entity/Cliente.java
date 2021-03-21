@@ -39,6 +39,13 @@ public class Cliente {
         )
     private Set<Autorizacao> autorizacoes;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "pedido_cliente",
+        joinColumns = {@JoinColumn(name = "cli_id")},
+        inverseJoinColumns = {@JoinColumn(name = "ped_id")}
+        )
+    private Set<Pedido> pedidos;
+
     public Long getId(){
         return this.id;
     }
@@ -77,6 +84,14 @@ public class Cliente {
 
     public void setAutorizacoes(Set<Autorizacao> autorizacoes){
         this.autorizacoes = autorizacoes;
+    }
+
+    public Set<Pedido> getPedidos(){
+        return this.pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos){
+        this.pedidos = pedidos;
     }
     
 }
