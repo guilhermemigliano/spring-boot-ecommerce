@@ -8,4 +8,4 @@ Aplicação Spring Boot com acesso a dados usando Spring Data JPA.
 
 Para teste do sistema, acessar o link abaixo para utilizar junto à plataforma GitPod.io
 
-[Link para o projeto no GitPod.io](gitpod.io/#https://github.com/guilhermemigliano/spring-boot-ecommerce)
+[Link para o projeto no GitPod.io](http://gitpod.io/#https://github.com/guilhermemigliano/spring-boot-ecommerce)
