@@ -28,7 +28,7 @@ public class Pedido {
     @Column(name = "ped_valor")
     private double valor; 
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")
     private Set<Cliente> clientes;
     
 

@@ -50,18 +50,23 @@ public class SegurancaServiceImpl implements SegurancaService {
     @Transactional
     public Pedido criarPedido(String nome, double valor, String email) {
         Cliente cliente = clienteRepo.buscarClientePorEmail(email);
+        Pedido pedido = new Pedido();
         if(cliente != null){
-            Pedido pedido = new Pedido();
+            
             pedido.setNome(nome);
             pedido.setValor(valor);
             cliente.setPedidos(new HashSet<Pedido>());
             cliente.getPedidos().add(pedido);
             pedidoRepo.save(pedido);
-            clienteRepo.save(cliente);
+            clienteRepo.save(cliente);   
+            return pedido;      
 
-            
         }
-        return null;
+        
+        else{
+            return null;
+        }
+        
     }
     
 }

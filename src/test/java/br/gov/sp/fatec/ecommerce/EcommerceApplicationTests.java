@@ -138,4 +138,18 @@ class EcommerceApplicationTests {
         assertNotNull(pedido);
     }
 
+    @Test
+    void buscaPedidoPorNomeEIdQuery(){
+        Pedido pedido = pedRepo.buscaPedidoPorNomeEId("Pedido-01", 1);
+        assertNotNull(pedido);    
+    }
+
+    @Test
+    void testaBuscaClienteNomePedidoQuery(){
+        Cliente cliente = clienteRepo.buscaPorNomePedido("Pedido-01");
+        assertNotNull(cliente);         
+    }
+
+
+
 }

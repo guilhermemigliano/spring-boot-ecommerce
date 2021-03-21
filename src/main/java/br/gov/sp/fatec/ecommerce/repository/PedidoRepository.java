@@ -9,5 +9,8 @@ public interface PedidoRepository extends JpaRepository <Pedido, Long> {
 
     @Query("select p from Pedido p where p.id = ?1")
     public Pedido buscaPedidoPorId (String id);
+
+    @Query("select p from Pedido p where p.nome = ?1 and p.id = ?2")
+    public Pedido buscaPedidoPorNomeEId (String nome, long id);
     
 }
