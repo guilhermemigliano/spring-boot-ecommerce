@@ -20,8 +20,8 @@ import br.gov.sp.fatec.ecommerce.repository.PedidoRepository;
 import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
 @SpringBootTest
-@Transactional //cada metodo da classe abre uma transação nova e abre uma conexão
-@Rollback //terminou o metodo ele não da commit
+//@Transactional //cada metodo da classe abre uma transação nova e abre uma conexão
+//@Rollback //terminou o metodo ele não da commit
 class EcommerceApplicationTests {
 
     @Autowired //sprint identificar que precisa encontrar algo do tipo ClienteRepository
@@ -77,12 +77,12 @@ class EcommerceApplicationTests {
        
     }
 
-    @Test
-    void testaUsuario(){
-        Autorizacao aut = autRepo.findById(1L).get();
-        assertEquals("Guilherme", aut.getClientes().iterator().next().getNome());
+    //@Test
+    //void testaUsuario(){
+    //    Autorizacao aut = autRepo.findById(1L).get();
+    //    assertEquals("Guilherme", aut.getClientes().iterator().next().getNome());
        
-    }
+    //}
 
     @Test
     void testaBuscaClienteNomeContains(){
@@ -132,18 +132,21 @@ class EcommerceApplicationTests {
         assertNotNull(cliente);
     }
 
+    //Transação cria um novo pedido e adiciona o pedido criado a um cliente. 
     @Test
     void testaServicoCriaPedido(){
         Pedido pedido = segService.criarPedido("Pedido-05", 500.00, "guilherme@fatec.com.br");
         assertNotNull(pedido);
     }
 
+    // Consulta com 2 parâmetros -> PedidoRepository
     @Test
     void buscaPedidoPorNomeEIdQuery(){
         Pedido pedido = pedRepo.buscaPedidoPorNomeEId("Pedido-01", 1);
         assertNotNull(pedido);    
     }
 
+    // Consulta com Join Cliente e Pedido -> ClienteRepository
     @Test
     void testaBuscaClienteNomePedidoQuery(){
         Cliente cliente = clienteRepo.buscaPorNomePedido("Pedido-01");
