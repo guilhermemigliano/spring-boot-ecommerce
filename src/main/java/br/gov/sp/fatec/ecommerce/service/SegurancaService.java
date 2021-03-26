@@ -7,6 +7,6 @@ public interface SegurancaService {
 
     public Cliente criarCliente(String nome, String email, String senha, String autorizacao);
 
-    public Pedido criarPedido(String nome, double valor, String email);
+    public Pedido criarPedido(String nome, double valor, String email) throws Exception;
     
 }

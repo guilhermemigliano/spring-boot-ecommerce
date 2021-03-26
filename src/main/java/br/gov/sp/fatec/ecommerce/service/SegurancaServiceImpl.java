@@ -48,7 +48,7 @@ public class SegurancaServiceImpl implements SegurancaService {
 
     
     @Transactional
-    public Pedido criarPedido(String nome, double valor, String email) {
+    public Pedido criarPedido(String nome, double valor, String email) throws Exception {
         Cliente cliente = clienteRepo.buscarClientePorEmail(email);
         Pedido pedido = new Pedido();
         if(cliente != null){
@@ -64,7 +64,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         }
         
         else{
-            return null;
+            throw new Exception("Cliente não encontrado");
         }
         
     }

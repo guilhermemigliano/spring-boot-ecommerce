@@ -134,7 +134,7 @@ class EcommerceApplicationTests {
 
     //Transação cria um novo pedido e adiciona o pedido criado a um cliente. 
     @Test
-    void testaServicoCriaPedido(){
+    void testaServicoCriaPedido() throws Exception {
         Pedido pedido = segService.criarPedido("Pedido-05", 500.00, "guilherme@fatec.com.br");
         assertNotNull(pedido);
     }
@@ -152,7 +152,4 @@ class EcommerceApplicationTests {
         Cliente cliente = clienteRepo.buscaPorNomePedido("Pedido-01");
         assertNotNull(cliente);         
     }
-
-
-
 }

@@ -89,6 +89,9 @@ insert into uau_usuario_autorizacao values (3,2);
 -- delete from uau_usuario_autorizacao where cli_id > 3;
 -- delete from aut_autorizacao where aut_id > 2;
 -- delete from cliente where cli_id > 3;
+-- delete from pedido_cliente where cli_id = 1;
+-- delete from pedido where ped_id > 4;
+
 
 -- select * from uau_usuario_autorizacao;
 -- select * from aut_autorizacao;
