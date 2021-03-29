@@ -23,6 +23,7 @@ public interface SegurancaService {
     // Autorizacao
 
     public Autorizacao buscarAutorizacaoPorNome(String nome);
+    public List<Autorizacao>  listarAutorizacoes();
 
 
     // Pedido

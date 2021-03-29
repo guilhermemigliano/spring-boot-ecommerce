@@ -27,11 +27,11 @@ public class Cliente {
     @Column(name = "cli_id")
     private Long id;
 
-    @JsonView({View.ClienteResumo.class, View.AutorizacaoResumo.class})
+    @JsonView({View.ClienteResumo.class, View.AutorizacaoResumo.class, View.PedidoLista.class})
     @Column(name = "cli_nome")
     private String nome;
 
-    @JsonView(View.ClienteCompleto.class)
+    @JsonView({View.ClienteCompleto.class, View.PedidoLista.class})
     @Column(name = "cli_email")
     private String email;
 
@@ -47,7 +47,7 @@ public class Cliente {
         )
     private Set<Autorizacao> autorizacoes;
 
-    @JsonView({View.ClienteResumo.class, View.PedidoLista.class}) 
+    @JsonView(View.ClienteResumo.class) 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "pedido_cliente",
         joinColumns = {@JoinColumn(name = "cli_id")},

@@ -142,7 +142,7 @@ class EcommerceApplicationTests {
     // Consulta com 2 parâmetros -> PedidoRepository
     @Test
     void buscaPedidoPorNomeEIdQuery(){
-        Pedido pedido = pedRepo.buscaPedidoPorNomeEId("Pedido-01", 1);
+        Pedido pedido = pedRepo.buscaPedidoPorNomeEId("Pedido-01", (long) 1);
         assertNotNull(pedido);    
     }
 

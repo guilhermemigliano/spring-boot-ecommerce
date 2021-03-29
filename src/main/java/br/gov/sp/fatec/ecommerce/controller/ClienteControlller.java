@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.gov.sp.fatec.ecommerce.entity.Autorizacao;
+
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
 import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
@@ -51,11 +51,7 @@ public class ClienteControlller {
         return segurancaService.criarCliente(cliente.getNome(), cliente.getEmail(), cliente.getSenha(), "ROLE_USER");
     }
 
-    @JsonView(View.AutorizacaoResumo.class)
-    @GetMapping(value = "autorizacao/{autorizacao}")
-    public Autorizacao buscarAutorizacaoPorNome(@PathVariable("autorizacao") String nome){
-        return segurancaService.buscarAutorizacaoPorNome(nome);
-    }
+    
 
     
 }

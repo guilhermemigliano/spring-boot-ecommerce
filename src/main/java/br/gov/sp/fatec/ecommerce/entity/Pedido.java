@@ -28,17 +28,17 @@ public class Pedido {
     @Column(name = "ped_id")
     private Long id;
 
-    @JsonView({View.ClienteResumo.class, View.PedidoResumo.class, View.PedidoLista.class})
+    @JsonView({View.ClienteResumo.class, View.PedidoLista.class})
     @Column(name = "ped_nome")
     private String nome;
 
-    @JsonView({View.ClienteResumo.class, View.PedidoResumo.class, View.PedidoLista.class})
+    @JsonView({View.ClienteResumo.class, View.PedidoLista.class})
     @Column(name = "ped_valor")
     private double valor; 
     
-    @JsonView(View.PedidoResumo.class)
+    @JsonView({View.PedidoLista.class})
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")    
-    private Set<Cliente> clientes;
+    private Set<Cliente> cliente;
     
 
     public Long getId(){
@@ -66,11 +66,11 @@ public class Pedido {
     }
 
     public Set<Cliente> getClientes(){
-        return this.clientes;
+        return this.cliente;
     }
 
     public void setClientes(Set<Cliente> clientes){
-        this.clientes = clientes;
+        this.cliente = clientes;
     }
 
     

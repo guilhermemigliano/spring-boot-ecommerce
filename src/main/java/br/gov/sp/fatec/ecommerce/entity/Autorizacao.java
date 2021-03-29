@@ -22,11 +22,11 @@ public class Autorizacao {
     @Column(name = "aut_id")
     private Long id;
 
-    @JsonView({View.ClienteResumo.class, View.AutorizacaoResumo.class})
+    @JsonView({View.ClienteResumo.class, View.AutorizacaoResumo.class, })
     @Column(name = "aut_nome")
     private String nome;
 
-    @JsonView(View.AutorizacaoResumo.class)
+    @JsonView({View.AutorizacaoResumo.class})
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "autorizacoes")
     private Set<Cliente> clientes;
    

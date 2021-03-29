@@ -77,6 +77,11 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Override
+    public List<Autorizacao>  listarAutorizacoes(){
+        return autRepo.findAll();
+    }
+
+    @Override
     public Cliente buscarClientePorId(Long id){
         Optional<Cliente> clienteOp = clienteRepo.findById(id);
         if(clienteOp.isPresent()) {
