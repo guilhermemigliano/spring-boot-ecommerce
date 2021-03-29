@@ -10,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import br.gov.sp.fatec.ecommerce.controller.View;
 
 @Entity
 @Table(name = "aut_autorizacao")
@@ -22,11 +22,12 @@ public class Autorizacao {
     @Column(name = "aut_id")
     private Long id;
 
+    @JsonView({View.ClienteResumo.class, View.AutorizacaoResumo.class})
     @Column(name = "aut_nome")
     private String nome;
 
+    @JsonView(View.AutorizacaoResumo.class)
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "autorizacoes")
-    @JsonIgnore
     private Set<Cliente> clientes;
    
 

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,6 +92,20 @@ public class SegurancaServiceImpl implements SegurancaService {
             return cliente;            
         }
         throw new RuntimeException("Cliente não encontrado!");
+    }
+
+    @Override
+    public Autorizacao buscarAutorizacaoPorNome(String nome){
+        Autorizacao autorizacao = autRepo.findByNome(nome);
+        if(autorizacao != null){
+            return autorizacao;
+        }
+        throw new RuntimeException("Autorização não encontrada");
+    }
+
+    @Override
+    public List<Pedido> listarPedidos(){
+        return pedidoRepo.findAll();
     }
     
 }

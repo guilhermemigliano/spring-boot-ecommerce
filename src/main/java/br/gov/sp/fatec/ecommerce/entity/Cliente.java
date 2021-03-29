@@ -13,25 +13,33 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.ecommerce.controller.View;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
 
+    @JsonView(View.ClienteCompleto.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cli_id")
     private Long id;
 
+    @JsonView({View.ClienteResumo.class, View.AutorizacaoResumo.class})
     @Column(name = "cli_nome")
     private String nome;
 
+    @JsonView(View.ClienteCompleto.class)
     @Column(name = "cli_email")
     private String email;
 
     @Column(name = "cli_senha")
     private String senha;
 
-    //Fetch => EAGER vai fazer o join e preencher todas as autorizações // LAZY => Faz select quando precisar usar com o get 
+    //Fetch => EAGER vai fazer o join e preencher todas as autorizações // LAZY => Faz select quando precisar usar com o get
+    @JsonView(View.ClienteResumo.class) 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "uau_usuario_autorizacao",
         joinColumns = {@JoinColumn(name = "cli_id")},
@@ -39,6 +47,7 @@ public class Cliente {
         )
     private Set<Autorizacao> autorizacoes;
 
+    @JsonView({View.ClienteCompleto.class, View.PedidoLista.class}) 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "pedido_cliente",
         joinColumns = {@JoinColumn(name = "cli_id")},

@@ -12,26 +12,32 @@ import javax.persistence.ManyToMany;
 
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.ecommerce.controller.View;
 
 
 @Entity
 @Table(name = "pedido")
 public class Pedido {
     
+    @JsonView(View.PedidoLista.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ped_id")
     private Long id;
 
+    @JsonView({View.ClienteResumo.class, View.PedidoResumo.class, View.PedidoLista.class})
     @Column(name = "ped_nome")
     private String nome;
 
+    @JsonView({View.ClienteResumo.class, View.PedidoResumo.class, View.PedidoLista.class})
     @Column(name = "ped_valor")
     private double valor; 
     
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")
-    @JsonIgnore
+    @JsonView(View.PedidoResumo.class)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")    
     private Set<Cliente> clientes;
     
 
