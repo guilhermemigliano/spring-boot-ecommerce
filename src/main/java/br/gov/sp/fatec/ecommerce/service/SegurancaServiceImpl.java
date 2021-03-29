@@ -1,6 +1,8 @@
 package br.gov.sp.fatec.ecommerce.service;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +69,20 @@ public class SegurancaServiceImpl implements SegurancaService {
             throw new Exception("Cliente não encontrado");
         }
         
+    }
+
+    @Override
+    public List<Cliente> buscarClientes(){
+        return clienteRepo.findAll();
+    }
+
+    @Override
+    public Cliente buscarClientePorId(Long id){
+        Optional<Cliente> clienteOp = clienteRepo.findById(id);
+        if(clienteOp.isPresent()) {
+            return clienteOp.get();            
+        }
+        throw new RuntimeException("Usuário não encontrado!");
     }
     
 }

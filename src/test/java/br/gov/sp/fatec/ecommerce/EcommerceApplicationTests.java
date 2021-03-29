@@ -20,8 +20,8 @@ import br.gov.sp.fatec.ecommerce.repository.PedidoRepository;
 import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
 @SpringBootTest
-//@Transactional //cada metodo da classe abre uma transação nova e abre uma conexão
-//@Rollback //terminou o metodo ele não da commit
+@Transactional //cada metodo da classe abre uma transação nova e abre uma conexão
+@Rollback //terminou o metodo ele não da commit
 class EcommerceApplicationTests {
 
     @Autowired //sprint identificar que precisa encontrar algo do tipo ClienteRepository
