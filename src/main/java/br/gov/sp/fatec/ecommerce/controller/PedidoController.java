@@ -48,7 +48,7 @@ public class PedidoController {
 
     @PostMapping
     public Pedido cadastrarNovoPedido(@RequestBody Pedido pedido) throws Exception {
-        return segurancaService.criarPedido(pedido.getNome(), pedido.getValor(), "maria@fatec.com.br");
+        return segurancaService.criarPedido(pedido.getNome(), pedido.getValor(), "pedro@fatec.com.br");
     }
    
     
