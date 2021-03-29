@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.ecommerce.entity.Autorizacao;
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
 import br.gov.sp.fatec.ecommerce.entity.Pedido;
+import br.gov.sp.fatec.ecommerce.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.ecommerce.repository.AutorizacaoRepository;
 import br.gov.sp.fatec.ecommerce.repository.ClienteRepository;
 import br.gov.sp.fatec.ecommerce.repository.PedidoRepository;
@@ -87,7 +87,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         if(clienteOp.isPresent()) {
             return clienteOp.get();            
         }
-        throw new RuntimeException("Cliente não encontrado!");
+        throw new RegistroNaoEncontradoException("Cliente não encontrado!");
     }
 
     @Override
@@ -96,7 +96,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         if(cliente != null) {
             return cliente;            
         }
-        throw new RuntimeException("Cliente não encontrado!");
+        throw new RegistroNaoEncontradoException("Cliente não encontrado!");
     }
 
     @Override
@@ -105,7 +105,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         if(autorizacao != null){
             return autorizacao;
         }
-        throw new RuntimeException("Autorização não encontrada");
+        throw new RegistroNaoEncontradoException("Autorização não encontrada");
     }
 
     @Override
@@ -119,7 +119,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         if(pedido != null){
             return pedido;
         }
-        throw new RuntimeException("Pedido não encontrado");
+        throw new RegistroNaoEncontradoException("Pedido não encontrado");
     }
 
     @Override
@@ -128,7 +128,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         if(pedido != null) {
             return pedido;           
         }
-        throw new RuntimeException("Pedido não encontrado!");
+        throw new RegistroNaoEncontradoException("Pedido não encontrado!");
 
     }
     
