@@ -14,5 +14,7 @@ public interface SegurancaService {
     public List<Cliente> buscarClientes();
 
     public Cliente buscarClientePorId(Long id);
+
+    public Cliente buscarClientePorNome(String nome);
     
 }

@@ -63,11 +63,10 @@ public class SegurancaServiceImpl implements SegurancaService {
             clienteRepo.save(cliente);   
             return pedido;      
 
-        }
-        
-        else{
-            throw new Exception("Cliente não encontrado");
-        }
+        }        
+       
+        throw new Exception("Cliente não encontrado");
+       
         
     }
 
@@ -82,7 +81,16 @@ public class SegurancaServiceImpl implements SegurancaService {
         if(clienteOp.isPresent()) {
             return clienteOp.get();            
         }
-        throw new RuntimeException("Usuário não encontrado!");
+        throw new RuntimeException("Cliente não encontrado!");
+    }
+
+    @Override
+    public Cliente buscarClientePorNome(String nome){
+        Cliente cliente = clienteRepo.findByNome(nome);
+        if(cliente != null) {
+            return cliente;            
+        }
+        throw new RuntimeException("Cliente não encontrado!");
     }
     
 }
