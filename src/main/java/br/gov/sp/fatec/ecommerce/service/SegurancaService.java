@@ -29,6 +29,10 @@ public interface SegurancaService {
 
     public List<Pedido> listarPedidos();
 
+    public Pedido buscarPedidoPorNome(String nome);
+
+    public Pedido buscarPedidoPorId(Long id);
+
     
     
 }

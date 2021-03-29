@@ -107,5 +107,24 @@ public class SegurancaServiceImpl implements SegurancaService {
     public List<Pedido> listarPedidos(){
         return pedidoRepo.findAll();
     }
+
+    @Override
+    public Pedido buscarPedidoPorNome(String nome){
+        Pedido pedido = pedidoRepo.findByNome(nome);
+        if(pedido != null){
+            return pedido;
+        }
+        throw new RuntimeException("Pedido não encontrado");
+    }
+
+    @Override
+    public Pedido buscarPedidoPorId(Long id){
+        Pedido pedido = pedidoRepo.buscaPedidoPorId(id);
+        if(pedido != null) {
+            return pedido;           
+        }
+        throw new RuntimeException("Pedido não encontrado!");
+
+    }
     
 }

@@ -47,7 +47,7 @@ public class Cliente {
         )
     private Set<Autorizacao> autorizacoes;
 
-    @JsonView({View.ClienteCompleto.class, View.PedidoLista.class}) 
+    @JsonView({View.ClienteResumo.class, View.PedidoLista.class}) 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "pedido_cliente",
         joinColumns = {@JoinColumn(name = "cli_id")},
