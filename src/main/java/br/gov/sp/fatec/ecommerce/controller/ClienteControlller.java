@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponents;
+//import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
@@ -56,7 +56,7 @@ public class ClienteControlller {
             cliente = segurancaService.criarCliente(cliente.getNome(), cliente.getEmail(), cliente.getSenha(), "ROLE_USER");
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.setLocation(
-                uriComponentsBuilder.path("/cliente/" + cliente.getId().build().toUri()));
+                uriComponentsBuilder.path("/cliente/id/" + cliente.getId()).build().toUri());
             
                 
         return new ResponseEntity<Cliente>(cliente, responseHeaders, HttpStatus.CREATED);
