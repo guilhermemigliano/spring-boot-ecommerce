@@ -51,7 +51,7 @@ public class SegurancaServiceImpl implements SegurancaService {
 
     
     @Transactional
-    public Pedido criarPedido(String nome, double valor, String email) throws Exception {
+    public Pedido criarPedido(String nome, double valor, String email){
         Cliente cliente = clienteRepo.buscarClientePorEmail(email);
         Pedido pedido = new Pedido();
         if(cliente != null){
@@ -60,14 +60,13 @@ public class SegurancaServiceImpl implements SegurancaService {
             pedido.setValor(valor);
             cliente.setPedidos(new HashSet<Pedido>());
             cliente.getPedidos().add(pedido);
+            pedido.setClientes(cliente);
             pedidoRepo.save(pedido);
             clienteRepo.save(cliente);   
             return pedido;      
 
-        }        
-       
-        throw new Exception("Cliente não encontrado");
-       
+        }               
+        throw new RegistroNaoEncontradoException("Cliente não encontrado!");     
         
     }
 
