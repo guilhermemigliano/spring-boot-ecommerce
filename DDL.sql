@@ -25,7 +25,7 @@ create table pedido (
   ped_valor float not null,  
   primary key (ped_id, cli_id),
   unique key uni_ped_nome (ped_nome),
-  foreign key pedcli_cli_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade,  
+  foreign key pedcli_cli_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade  
 );
 
 -- Cria tabela Autorização
@@ -53,8 +53,8 @@ insert into cliente (cli_nome, cli_email, cli_senha) values ('Joana', 'joana@fat
 -- Pedido
 insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-01", 155.99, 2);
 insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-02", 160.10, 2);
-insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-03", 277.00, 2);
-insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-04", 299.99, 2);
+insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-03", 277.00, 3);
+insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-04", 299.99, 3);
 
 
 -- Autorização
