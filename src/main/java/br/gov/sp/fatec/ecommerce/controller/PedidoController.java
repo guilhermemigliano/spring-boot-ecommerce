@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.gov.sp.fatec.ecommerce.entity.Pedido;
+import br.gov.sp.fatec.ecommerce.exception.RegistroNaoEncontradoException;
+import br.gov.sp.fatec.ecommerce.repository.PedidoRepository;
 import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
 //metodos que estiverem aqui podem ser rotas (serviços)
@@ -27,6 +30,9 @@ import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 @RequestMapping(value = "/pedido")
 @CrossOrigin
 public class PedidoController {
+
+    @Autowired
+    private PedidoRepository pedidoRepo;
 
     @Autowired
     private SegurancaService segurancaService;
@@ -55,10 +61,22 @@ public class PedidoController {
         pedido = segurancaService.criarPedido(pedido.getNome(), pedido.getValor(), "pedro@fatec.com.br");
         HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.setLocation(
-                uriComponentsBuilder.path("/cliente/id/" + pedido.getId()).build().toUri());
+                uriComponentsBuilder.path("/pedido/id/" + pedido.getId()).build().toUri());
         
         return new ResponseEntity<Pedido>(pedido, responseHeaders, HttpStatus.CREATED);
     }   
+
+    @DeleteMapping("/id/{id}")
+    public String deletePedido(@PathVariable(value = "id") Long id) {
+        Pedido pedido = pedidoRepo.buscaPedidoPorId(id);
+        if(pedido != null){
+            pedidoRepo.delete(pedido);
+            return "Pedido excluído com sucesso";
+        }               
+        throw new RegistroNaoEncontradoException("Pedido não encontrado!");            
+    }
+
+    
    
 
     

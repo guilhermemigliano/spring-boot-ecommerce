@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
+import br.gov.sp.fatec.ecommerce.exception.RegistroNaoEncontradoException;
+import br.gov.sp.fatec.ecommerce.repository.ClienteRepository;
 import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
 //metodos que estiverem aqui podem ser rotas (serviços)
@@ -31,6 +34,9 @@ public class ClienteControlller {
     
     @Autowired
     private SegurancaService segurancaService;
+
+    @Autowired
+    private ClienteRepository clienteRepo;
 
     @JsonView(View.ClienteResumo.class)
     @GetMapping
@@ -60,6 +66,16 @@ public class ClienteControlller {
             
                 
         return new ResponseEntity<Cliente>(cliente, responseHeaders, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/id/{id}")
+    public String deleteCliente(@PathVariable(value = "id") Long id) {
+        Cliente cliente = segurancaService.buscarClientePorId(id);
+        if(cliente != null){
+            clienteRepo.delete(cliente);
+            return "Cliente excluído com sucesso";
+        }               
+        throw new RegistroNaoEncontradoException("Cliente não encontrado!");            
     }
 
     

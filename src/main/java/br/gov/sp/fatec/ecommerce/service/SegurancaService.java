@@ -35,5 +35,10 @@ public interface SegurancaService {
     public Pedido buscarPedidoPorId(Long id);
 
     
+
+        
+    
+
+    
     
 }

@@ -18,5 +18,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     public Pedido findByNome(String pedido);
 
     public Optional<Pedido> findById(Long id);
+
+    
     
 }

@@ -70,6 +70,8 @@ public class SegurancaServiceImpl implements SegurancaService {
         
     }
 
+    
+
     @Override
     public List<Cliente> buscarClientes(){
         return clienteRepo.findAll();
@@ -129,6 +131,6 @@ public class SegurancaServiceImpl implements SegurancaService {
         }
         throw new RegistroNaoEncontradoException("Pedido não encontrado!");
 
-    }
+    }    
     
 }
