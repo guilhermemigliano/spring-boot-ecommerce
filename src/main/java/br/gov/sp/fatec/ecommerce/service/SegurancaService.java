@@ -18,6 +18,8 @@ public interface SegurancaService {
 
     public Cliente buscarClientePorNome(String nome);
 
+    public Cliente atualizarCliente(String nome, String email, String senha, Long id);
+
 
 
     // Autorizacao

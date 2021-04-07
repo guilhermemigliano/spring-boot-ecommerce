@@ -70,6 +70,20 @@ public class SegurancaServiceImpl implements SegurancaService {
         
     }
 
+    public Cliente atualizarCliente(String nome, String email, String senha, Long id){
+        Cliente cliente = clienteRepo.buscarClientePorEmail(email);
+        if(cliente != null){
+            cliente.setNome(nome);
+            cliente.setEmail(email);
+            cliente.setSenha(senha);
+            clienteRepo.save(cliente);
+
+            return cliente;
+        }
+
+        throw new RegistroNaoEncontradoException("Cliente não encontrado!");
+    }
+
     public Pedido atualizarValorPedido(double valor, Long id){
 
         Pedido pedido = pedidoRepo.buscaPedidoPorId(id);

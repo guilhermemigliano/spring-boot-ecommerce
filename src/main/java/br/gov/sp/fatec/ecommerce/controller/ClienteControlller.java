@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,6 +77,17 @@ public class ClienteControlller {
             return "Cliente excluído com sucesso";
         }               
         throw new RegistroNaoEncontradoException("Cliente não encontrado!");            
+    }
+
+    @PutMapping("/id/{id}")
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente,
+            UriComponentsBuilder uriComponentsBuilder) throws Exception {
+
+        cliente = segurancaService.atualizarCliente(cliente.getNome(), cliente.getEmail(), cliente.getSenha(), id);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(uriComponentsBuilder.path("/cliente/id/" + cliente.getId()).build().toUri());
+
+        return new ResponseEntity<Cliente>(cliente, responseHeaders, HttpStatus.CREATED);
     }
 
     
