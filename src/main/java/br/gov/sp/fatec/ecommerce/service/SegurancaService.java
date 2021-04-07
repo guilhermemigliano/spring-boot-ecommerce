@@ -34,6 +34,7 @@ public interface SegurancaService {
 
     public Pedido buscarPedidoPorId(Long id);
 
+    public Pedido atualizarValorPedido(double valor, Long id);
     
 
         

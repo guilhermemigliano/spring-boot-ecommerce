@@ -70,6 +70,20 @@ public class SegurancaServiceImpl implements SegurancaService {
         
     }
 
+    public Pedido atualizarValorPedido(double valor, Long id){
+
+        Pedido pedido = pedidoRepo.buscaPedidoPorId(id);
+
+        if (pedido != null) {
+            pedido.setValor(valor);
+            pedidoRepo.save(pedido);
+            return pedido;            
+        }
+
+        throw new RegistroNaoEncontradoException("Pedido não encontrado!");
+
+    }
+
     
 
     @Override

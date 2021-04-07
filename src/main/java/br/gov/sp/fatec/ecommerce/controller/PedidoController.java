@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,7 +60,6 @@ public class PedidoController {
     public ResponseEntity<Pedido> cadastrarNovoPedido(@RequestBody Pedido pedido,
             UriComponentsBuilder uriComponentsBuilder) throws Exception {
 
-        
         pedido = segurancaService.criarPedido(pedido.getNome(), pedido.getValor(), "pedro@fatec.com.br");
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setLocation(uriComponentsBuilder.path("/pedido/id/" + pedido.getId()).build().toUri());
@@ -80,32 +77,15 @@ public class PedidoController {
         throw new RegistroNaoEncontradoException("Pedido não encontrado!");
     }
 
-    
+    @PutMapping("/id/{id}")
+    public ResponseEntity<Pedido> atualizarPedido(@PathVariable Long id, @RequestBody Pedido pedido,
+            UriComponentsBuilder uriComponentsBuilder) throws Exception {
 
-    @PutMapping(value = "/id/{id}")
-    @Transactional
-    public ResponseEntity<Pedido> pedido (@PathVariable Long id, @RequestBody Pedido pedido){
-        pedido = pedidoRepo.buscaPedidoPorId(id);
-        if (pedido != null) {
-                    pedido.setValor(1150.0);
-                    pedidoRepo.save(pedido);
+        pedido = segurancaService.atualizarValorPedido(pedido.getValor(), id);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(uriComponentsBuilder.path("/pedido/id/" + pedido.getId()).build().toUri());
 
-                    return ResponseEntity.ok(pedido);
-
-                }
-        
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<Pedido>(pedido, responseHeaders, HttpStatus.CREATED);
     }
 
-        
-        
-            
-                
-    
-
-    
-   
-
-    
-    
 }
