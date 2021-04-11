@@ -21,6 +21,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     
 
+    
+
     //JPQL
     @Query("select c from  Cliente c where c.nome = ?1 ")
     public Cliente buscaClientePorNome (String nome);
@@ -34,8 +36,9 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query("select c from  Cliente c where c.email = ?1 ")
     public Cliente buscarClientePorEmail (String email);
 
-     @Query("select c from  Cliente c where c.id = ?1 ")
-    public Cliente findById (Long id);
+    @Query("select c from  Cliente c where c.id = ?1 ")
+    public Cliente buscarClientePorId (Long id);
+     
 
 
     //JPQL com cliente e pedidos
