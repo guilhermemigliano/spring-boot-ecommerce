@@ -71,7 +71,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     public Cliente atualizarCliente(String nome, String email, String senha, Long id){
-        Cliente cliente = clienteRepo.buscarClientePorEmail(email);
+        Cliente cliente = clienteRepo.findById(id);
         if(cliente != null){
             cliente.setNome(nome);
             cliente.setEmail(email);
