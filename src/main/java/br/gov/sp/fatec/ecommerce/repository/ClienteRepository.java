@@ -14,10 +14,14 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     public List<Cliente> findByNomeContainsIgnoreCase(String nome );
 
     public Cliente findByNome(String nome);
-
+    
     public Cliente findByNomeAndSenha(String nome, String senha);
 
     public List<Cliente> findByAutorizacoesNome(String autorizacao);
+
+    
+
+    
 
     //JPQL
     @Query("select c from  Cliente c where c.nome = ?1 ")
@@ -31,6 +35,10 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     @Query("select c from  Cliente c where c.email = ?1 ")
     public Cliente buscarClientePorEmail (String email);
+
+    @Query("select c from  Cliente c where c.id = ?1 ")
+    public Cliente buscarClientePorId (Long id);
+     
 
 
     //JPQL com cliente e pedidos

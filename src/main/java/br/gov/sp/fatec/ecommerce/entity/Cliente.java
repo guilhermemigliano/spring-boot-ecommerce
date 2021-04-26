@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -48,11 +49,7 @@ public class Cliente {
     private Set<Autorizacao> autorizacoes;
 
     @JsonView(View.ClienteResumo.class) 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "pedido_cliente",
-        joinColumns = {@JoinColumn(name = "cli_id")},
-        inverseJoinColumns = {@JoinColumn(name = "ped_id")}
-        )
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Pedido> pedidos;
 
     public Long getId(){

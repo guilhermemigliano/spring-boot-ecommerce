@@ -51,7 +51,7 @@ public class SegurancaServiceImpl implements SegurancaService {
 
     
     @Transactional
-    public Pedido criarPedido(String nome, double valor, String email) throws Exception {
+    public Pedido criarPedido(String nome, double valor, String email){
         Cliente cliente = clienteRepo.buscarClientePorEmail(email);
         Pedido pedido = new Pedido();
         if(cliente != null){
@@ -60,16 +60,45 @@ public class SegurancaServiceImpl implements SegurancaService {
             pedido.setValor(valor);
             cliente.setPedidos(new HashSet<Pedido>());
             cliente.getPedidos().add(pedido);
+            pedido.setClientes(cliente);
             pedidoRepo.save(pedido);
             clienteRepo.save(cliente);   
             return pedido;      
 
-        }        
-       
-        throw new Exception("Cliente não encontrado");
-       
+        }               
+        throw new RegistroNaoEncontradoException("Cliente não encontrado!");     
         
     }
+
+    public Cliente atualizarCliente(String nome, String email, String senha, Long id){
+        Cliente cliente = clienteRepo.buscarClientePorId(id);
+        if(cliente != null){
+            cliente.setNome(nome);
+            cliente.setEmail(email);
+            cliente.setSenha(senha);
+            clienteRepo.save(cliente);
+
+            return cliente;
+        }
+
+        throw new RegistroNaoEncontradoException("Cliente não encontrado!");
+    }
+
+    public Pedido atualizarValorPedido(double valor, Long id){
+
+        Pedido pedido = pedidoRepo.buscaPedidoPorId(id);
+
+        if (pedido != null) {
+            pedido.setValor(valor);
+            pedidoRepo.save(pedido);
+            return pedido;            
+        }
+
+        throw new RegistroNaoEncontradoException("Pedido não encontrado!");
+
+    }
+
+    
 
     @Override
     public List<Cliente> buscarClientes(){
@@ -130,6 +159,6 @@ public class SegurancaServiceImpl implements SegurancaService {
         }
         throw new RegistroNaoEncontradoException("Pedido não encontrado!");
 
-    }
+    }    
     
 }

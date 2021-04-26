@@ -17,7 +17,7 @@ import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 @RestController
 //permite acesso externo de qualquer lugar se não colocar as origens. 
 @RequestMapping(value = "/autorizacao")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class AutorizacaoController {
 

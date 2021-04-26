@@ -10,13 +10,15 @@ public interface SegurancaService {
 
     public Cliente criarCliente(String nome, String email, String senha, String autorizacao);
 
-    public Pedido criarPedido(String nome, double valor, String email) throws Exception;
+    public Pedido criarPedido(String nome, double valor, String email);
 
     public List<Cliente> buscarClientes();
 
     public Cliente buscarClientePorId(Long id);
 
     public Cliente buscarClientePorNome(String nome);
+
+    public Cliente atualizarCliente(String nome, String email, String senha, Long id);
 
 
 
@@ -33,6 +35,12 @@ public interface SegurancaService {
     public Pedido buscarPedidoPorNome(String nome);
 
     public Pedido buscarPedidoPorId(Long id);
+
+    public Pedido atualizarValorPedido(double valor, Long id);
+    
+
+        
+    
 
     
     

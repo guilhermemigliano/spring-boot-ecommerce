@@ -20,20 +20,13 @@ unique key uni_cli_email (cli_email)
 -- Cria tabela Pedido
 create table pedido (
   ped_id bigint unsigned not null auto_increment,
+  cli_id bigint unsigned not null,
   ped_nome varchar(50) not null,
   ped_valor float not null,  
-  primary key (ped_id),
-  unique key uni_ped_nome (ped_nome)  
+  primary key (ped_id, cli_id),
+  unique key uni_ped_nome (ped_nome),
+  foreign key pedcli_cli_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade  
 );
-
-create table pedido_cliente(
-  cli_id bigint unsigned not null,
-  ped_id bigint unsigned not null,
-  primary key (cli_id, ped_id),
-  foreign key pedcli_cli_fk (cli_id) references cliente (cli_id) on delete restrict on update cascade,
-  foreign key pedcli_ped_fk (ped_id) references pedido (ped_id) on delete restrict on update cascade
-);
-
 
 -- Cria tabela Autorização
 create table aut_autorizacao (
@@ -58,18 +51,10 @@ insert into cliente (cli_nome, cli_email, cli_senha) values ('Maria', 'maria@fat
 insert into cliente (cli_nome, cli_email, cli_senha) values ('Joana', 'joana@fatec.com.br', 'senha12345');
 
 -- Pedido
-insert into pedido (ped_nome, ped_valor) values ("Pedido-01", 155.99);
-insert into pedido (ped_nome, ped_valor) values ("Pedido-02", 160.10);
-insert into pedido (ped_nome, ped_valor) values ("Pedido-03", 277.00);
-insert into pedido (ped_nome, ped_valor) values ("Pedido-04", 299.99);
-
--- Pedido_Cliente
-
-insert into pedido_cliente (cli_id, ped_id) values (2, 1);
-insert into pedido_cliente (cli_id, ped_id) values (2, 2);
-insert into pedido_cliente (cli_id, ped_id) values (3, 3);
-insert into pedido_cliente (cli_id, ped_id) values (3, 4);
-
+insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-01", 155.99, 2);
+insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-02", 160.10, 2);
+insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-03", 277.00, 3);
+insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-04", 299.99, 3);
 
 
 -- Autorização
