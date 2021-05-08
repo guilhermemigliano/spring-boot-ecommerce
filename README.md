@@ -13,4 +13,10 @@
 - c. Formatação de JSON usando JsonView.
 Para teste do sistema, acessar o link abaixo para utilizar junto à plataforma GitPod.io
 
+## 3. Aplicação do item 2 com segurança. A aplicação deve possuir:
+
+- a. Autenticação usando login e token JWT;
+- b. Autorização por anotações (não anotar Controllers). Utilizar, no mínimo,
+     dois níveis de autorização (Usuário e Administrador).
+
 [Link para o projeto no GitPod.io](http://gitpod.io/#https://github.com/guimigliano/spring-boot-ecommerce)
