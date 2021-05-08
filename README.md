@@ -19,4 +19,4 @@ Para teste do sistema, acessar o link abaixo para utilizar junto à plataforma G
 - b. Autorização por anotações (não anotar Controllers). Utilizar, no mínimo,
      dois níveis de autorização (Usuário e Administrador).
 
-[Link para o projeto no GitPod.io](http://gitpod.io/#https://github.com/guimigliano/spring-boot-ecommerce)
+[Link para o projeto no GitPod.io](http://gitpod.io/#https://github.com/guilhermemigliano/spring-boot-ecommerce)

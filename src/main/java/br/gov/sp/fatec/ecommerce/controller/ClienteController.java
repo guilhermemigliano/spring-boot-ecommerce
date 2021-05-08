@@ -41,6 +41,8 @@ public class ClienteController {
 
     @JsonView(View.ClienteResumo.class)
     @GetMapping
+   
+    
     public List<Cliente> buscarClientes(){
         return segurancaService.buscarClientes();
     }
@@ -57,6 +59,7 @@ public class ClienteController {
         return segurancaService.buscarClientePorNome(nome);
     }
 
+    
     @PostMapping
     public ResponseEntity<Cliente> cadastrarNovoCliente(@RequestBody Cliente cliente,
         UriComponentsBuilder uriComponentsBuilder){
