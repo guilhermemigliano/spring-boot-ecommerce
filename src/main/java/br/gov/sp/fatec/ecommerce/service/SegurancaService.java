@@ -2,11 +2,13 @@ package br.gov.sp.fatec.ecommerce.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import br.gov.sp.fatec.ecommerce.entity.Autorizacao;
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
 import br.gov.sp.fatec.ecommerce.entity.Pedido;
 
-public interface SegurancaService {
+public interface SegurancaService extends UserDetailsService {
 
     public Cliente criarCliente(String nome, String email, String senha, String autorizacao);
 

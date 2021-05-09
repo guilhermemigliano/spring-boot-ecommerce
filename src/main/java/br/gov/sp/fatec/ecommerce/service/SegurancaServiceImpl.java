@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import br.gov.sp.fatec.ecommerce.entity.Autorizacao;
 import br.gov.sp.fatec.ecommerce.entity.Cliente;
 import br.gov.sp.fatec.ecommerce.entity.Pedido;
@@ -16,6 +18,7 @@ import br.gov.sp.fatec.ecommerce.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.ecommerce.repository.AutorizacaoRepository;
 import br.gov.sp.fatec.ecommerce.repository.ClienteRepository;
 import br.gov.sp.fatec.ecommerce.repository.PedidoRepository;
+
 
 //como o component => onde vai ter a regra de negócio
 @Service("segurancaService")
@@ -30,6 +33,9 @@ public class SegurancaServiceImpl implements SegurancaService {
     @Autowired
     private PedidoRepository pedidoRepo;
 
+    @Autowired
+    private PasswordEncoder passEncoder;
+
     @Transactional
     public Cliente criarCliente(String nome, String email, String senha, String autorizacao) {
         Autorizacao aut = autRepo.findByNome(autorizacao);
@@ -41,7 +47,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         Cliente cliente = new Cliente();
         cliente.setNome(nome);
         cliente.setEmail(email);
-        cliente.setSenha(senha);
+        cliente.setSenha(passEncoder.encode(senha));
         //HashSet não permite ter elementos iguais.
         cliente.setAutorizacoes(new HashSet<Autorizacao>());
         cliente.getAutorizacoes().add(aut);
