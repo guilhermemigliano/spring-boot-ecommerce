@@ -49,6 +49,7 @@ create table uau_usuario_autorizacao (
 insert into cliente (cli_nome, cli_email, cli_senha) values ('Guilherme', 'guilherme@fatec.com.br', 'senha12345');
 insert into cliente (cli_nome, cli_email, cli_senha) values ('Maria', 'maria@fatec.com.br', 'senha12345');
 insert into cliente (cli_nome, cli_email, cli_senha) values ('Joana', 'joana@fatec.com.br', 'senha12345');
+insert into cliente (cli_nome, cli_email, cli_senha) values ('admin', 'admin@fatec.com.br', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 
 -- Pedido
 insert into pedido (ped_nome, ped_valor, cli_id) values ("Pedido-01", 155.99, 2);
@@ -65,6 +66,8 @@ insert into aut_autorizacao(aut_nome) values ('ROLE_USER');
 insert into uau_usuario_autorizacao values (1,1);
 insert into uau_usuario_autorizacao values (2,2);
 insert into uau_usuario_autorizacao values (3,2);
+insert into uau_usuario_autorizacao values (4,1);
+
 
 
 
