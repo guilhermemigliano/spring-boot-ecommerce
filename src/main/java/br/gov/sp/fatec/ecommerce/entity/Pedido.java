@@ -74,8 +74,6 @@ public class Pedido {
 
     public void setClientes(Cliente clientes){
         this.cliente = clientes;
-    }
-
-    
+    }  
     
 }

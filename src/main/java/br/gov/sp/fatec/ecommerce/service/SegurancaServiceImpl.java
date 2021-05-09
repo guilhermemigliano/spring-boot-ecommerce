@@ -41,6 +41,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     private PasswordEncoder passEncoder;
 
     @Transactional
+    @PreAuthorize("isAuthenticated()")
     public Cliente criarCliente(String nome, String email, String senha, String autorizacao) {
         Autorizacao aut = autRepo.findByNome(autorizacao);
         if (aut == null) {
@@ -61,6 +62,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Transactional
+    @PreAuthorize("isAuthenticated()")
     public Pedido criarPedido(String nome, double valor, String email) {
         Cliente cliente = clienteRepo.buscarClientePorEmail(email);
         Pedido pedido = new Pedido();
@@ -80,6 +82,7 @@ public class SegurancaServiceImpl implements SegurancaService {
 
     }
 
+    @PreAuthorize("isAuthenticated()")
     public Cliente atualizarCliente(String nome, String email, String senha, Long id) {
         Cliente cliente = clienteRepo.buscarClientePorId(id);
         if (cliente != null) {
@@ -94,6 +97,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         throw new RegistroNaoEncontradoException("Cliente não encontrado!");
     }
 
+    @PreAuthorize("isAuthenticated()")
     public Pedido atualizarValorPedido(double valor, Long id) {
 
         Pedido pedido = pedidoRepo.buscaPedidoPorId(id);
@@ -109,17 +113,19 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Cliente> buscarClientes() {
         return clienteRepo.findAll();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Autorizacao> listarAutorizacoes() {
         return autRepo.findAll();
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ADMIN', 'USUARIO')")
     public Cliente buscarClientePorId(Long id) {
         Optional<Cliente> clienteOp = clienteRepo.findById(id);
         if (clienteOp.isPresent()) {
@@ -129,6 +135,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Cliente buscarClientePorNome(String nome) {
         Cliente cliente = clienteRepo.findByNome(nome);
         if (cliente != null) {
@@ -138,6 +145,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Autorizacao buscarAutorizacaoPorNome(String nome) {
         Autorizacao autorizacao = autRepo.findByNome(nome);
         if (autorizacao != null) {
@@ -147,11 +155,13 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public List<Pedido> listarPedidos() {
         return pedidoRepo.findAll();
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Pedido buscarPedidoPorNome(String nome) {
         Pedido pedido = pedidoRepo.findByNome(nome);
         if (pedido != null) {
@@ -161,6 +171,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Pedido buscarPedidoPorId(Long id) {
         Pedido pedido = pedidoRepo.buscaPedidoPorId(id);
         if (pedido != null) {
@@ -182,5 +193,6 @@ public class SegurancaServiceImpl implements SegurancaService {
                         .toArray(new String[cliente.getAutorizacoes().size()]))
                 .build();
     }
+    //authorities é um vetor de string -> pega as aut transforma em uma lista, tira os nomes, e depois passar para o array
 
 }
