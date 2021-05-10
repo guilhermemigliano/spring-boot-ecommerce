@@ -125,7 +125,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
 
     @Override
-    @PreAuthorize("hasAnyRole('ADMIN', 'USUARIO')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public Cliente buscarClientePorId(Long id) {
         Optional<Cliente> clienteOp = clienteRepo.findById(id);
         if (clienteOp.isPresent()) {

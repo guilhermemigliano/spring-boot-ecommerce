@@ -46,9 +46,9 @@ create table uau_usuario_autorizacao (
 );
 
 -- Cliente
-insert into cliente (cli_nome, cli_email, cli_senha) values ('Guilherme', 'guilherme@fatec.com.br', 'senha12345');
-insert into cliente (cli_nome, cli_email, cli_senha) values ('Maria', 'maria@fatec.com.br', 'senha12345');
-insert into cliente (cli_nome, cli_email, cli_senha) values ('Joana', 'joana@fatec.com.br', 'senha12345');
+insert into cliente (cli_nome, cli_email, cli_senha) values ('Guilherme', 'guilherme@fatec.com.br', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
+insert into cliente (cli_nome, cli_email, cli_senha) values ('Maria', 'maria@fatec.com.br', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
+insert into cliente (cli_nome, cli_email, cli_senha) values ('Joana', 'joana@fatec.com.br', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into cliente (cli_nome, cli_email, cli_senha) values ('admin', 'admin@fatec.com.br', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 
 -- Pedido
