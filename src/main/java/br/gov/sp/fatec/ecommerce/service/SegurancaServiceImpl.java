@@ -195,4 +195,13 @@ public class SegurancaServiceImpl implements SegurancaService {
     }
     //authorities é um vetor de string -> pega as aut transforma em uma lista, tira os nomes, e depois passar para o array
 
+
+    @Override
+    public String buscarAutorizacaoUsuario(String autorizacao) {
+        Cliente cliente = clienteRepo.findByNome(nome);
+        return cliente.getAutorizacoes().iterator().next().getNome();
+    }
+
 }
+
+

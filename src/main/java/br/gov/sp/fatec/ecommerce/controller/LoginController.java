@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import br.gov.sp.fatec.ecommerce.repository.ClienteRepository;
+import br.gov.sp.fatec.ecommerce.service.SegurancaService;
 
 import br.gov.sp.fatec.ecommerce.security.JwtUtils;
 import br.gov.sp.fatec.ecommerce.security.Login;
@@ -23,12 +25,17 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authManager;
 
+    private SegurancaService segurancaService;
+
     @PostMapping
     public Login autenticar(@RequestBody Login login) throws JsonProcessingException{
 
         Authentication auth = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());
         auth = authManager.authenticate(auth);
-        login.setPassword(null);
+        login.setPassword(null);    
+        login.setAutorizacao(segurancaService.buscarAutorizacaoUsuario(login.getUsername()));  
+        
+
         login.setToken(JwtUtils.generateToken(auth));
 
         return login;

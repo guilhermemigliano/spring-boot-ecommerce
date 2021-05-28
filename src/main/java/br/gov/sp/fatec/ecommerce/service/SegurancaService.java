@@ -29,6 +29,8 @@ public interface SegurancaService extends UserDetailsService {
     public Autorizacao buscarAutorizacaoPorNome(String nome);
     public List<Autorizacao>  listarAutorizacoes();
 
+    public String buscarAutorizacaoUsuario(String autorizacao);
+
 
     // Pedido
 
