@@ -198,7 +198,7 @@ public class SegurancaServiceImpl implements SegurancaService {
 
     @Override
     public String buscarAutorizacaoUsuario(String autorizacao) {
-        Cliente cliente = clienteRepo.findByNome(nome);
+        Cliente cliente = clienteRepo.findByNome(autorizacao);
         return cliente.getAutorizacoes().iterator().next().getNome();
     }
 
