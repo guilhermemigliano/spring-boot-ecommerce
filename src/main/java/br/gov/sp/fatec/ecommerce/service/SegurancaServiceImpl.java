@@ -41,7 +41,7 @@ public class SegurancaServiceImpl implements SegurancaService {
     private PasswordEncoder passEncoder;
 
     @Transactional
-    @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("isAuthenticated()")
     public Cliente criarCliente(String nome, String email, String senha, String autorizacao) {
         Autorizacao aut = autRepo.findByNome(autorizacao);
         if (aut == null) {
